@@ -1,0 +1,31 @@
+<form name="Calc">
+    <input type="text" id="numbers" placeholder="Enter numbers separated by commas" size="50">
+    <input type="button" value="Sum" onclick="calculate('sum')">
+    <input type="button" value="Average" onclick="calculate('avg')">
+    <input type="button" value="Standard Deviation" onclick="calculate('std')">
+    <input type="text" id="result" placeholder="Result" disabled size="20">
+  </form>
+  <script>
+    function calculate(operation) {
+      const input = document.getElementById("numbers").value;
+      const numbers = input.split(",").map(Number);
+      if (numbers.some(isNaN)) {
+        alert("Please enter valid numbers.");
+        return; }
+      let result;
+      switch (operation) {
+        case 'sum':
+          result = numbers.reduce((a, b) => a + b, 0);
+          break;
+        case 'avg':
+   result = numbers.reduce((a, b) => a + b, 0) / numbers.length;
+          break;
+        case 'std':
+          const mean = numbers.reduce((a, b) => a + b, 0) / numbers.length;
+          const variance = numbers.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / numbers.length;
+          result = Math.sqrt(variance);
+          break; }
+      document.getElementById("result").value = result.toFixed(2); }
+  </script>
+  
+  
